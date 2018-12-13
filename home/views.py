@@ -17,13 +17,6 @@ class IndexView(View):
         return render(request, self.template_name, context)
 
 
-class AboutView(View):
-    template_name = 'home/about.html'
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
-
-
 def upload(request):
     ImageFormSet = modelformset_factory(
                                         AssignmentImage, form=ImageForm,
@@ -35,8 +28,11 @@ def upload(request):
 
         if form.is_valid and formset.is_valid():
             instance = form.save(commit=False)
+            instance.email_confirmed=True
             instance.timestamp = timezone.now()
             instance.save()
+
+            assignment_pk = instance.pk
 
             for form in formset.cleaned_data:
                 try:
@@ -47,7 +43,7 @@ def upload(request):
                     image = form['image']
                     image_obj = AssignmentImage(assignment=instance, image=image)
                     image_obj.save()
-            return redirect()
+            return redirect('/assignments/view/'+str(assignment_pk)+'/')
     else:
         form = AssignmentForm()
         formset = ImageFormSet(queryset=AssignmentImage.objects.none())

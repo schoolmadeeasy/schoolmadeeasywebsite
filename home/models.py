@@ -4,10 +4,10 @@ from localflavor.us.us_states import US_STATES
 
 class AssignmentManager(models.Manager):
     def get_all_assignments(self):
-        return self.all()
+        return self.filter(email_confirmed=True).all()
 
     def get_latest_assignments(self):
-        return self.all().order_by('-timestamp')
+        return self.filter(email_confirmed=True).all().order_by('-timestamp')
 
 
 class Assignment(models.Model):
@@ -44,9 +44,9 @@ class AssignmentImage(models.Model):
 
 
 
-'''  
+'''
 This model was going to be used for a email confirmation for when someone upload an assignment, but I was having too
-many problems with it.  
+many problems with it.
 '''
 '''
 class EmailConfirmation(models.Model):
