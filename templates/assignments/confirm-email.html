@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+{% block title %}<title></title>{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    <div class="row mt-4">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8 text-center">
+            <h1 class="font-weight-normal">Confirm Your Email Address</h1>
+            <h3 class="font-weight-normal mt-3">An Email Was Sent to <b>{{ email_obj.user_email }}</b></h3>
+            <h5 class="font-weight-normal mt-3">
+                Your uploaded homework assignment will not be viewable until you email address is confirmed. If you
+                entered in your wrong email address, or did not receive an email, please click the "Change Email" button
+                below.
+            </h5>
+            <a href="#" class="btn btn-primary mt-4">Change Email</a>
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}

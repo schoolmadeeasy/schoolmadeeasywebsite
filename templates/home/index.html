@@ -1,0 +1,230 @@
+{% extends 'home/base.html' %}
+{% block title %}{% endblock %}
+{% block head %}
+    <style>
+        #homepage-card {
+            min-height: 375px;
+        }
+
+        #upload-icon,
+        #search-icon {
+            font-size: 15rem;
+            color: #007bff;
+            opacity: 0.6;
+        }
+
+        #nav-cards-row {
+            margin-bottom: 4rem;
+        }
+
+        #view-all-link {
+            font-size: 1.25rem;
+        }
+
+        #view-all-link:hover {
+            text-decoration: none;
+            opacity: 0.7;
+        }
+
+        #view-all-icon {
+            font-size: 1.1rem;
+            margin-left: 0.5rem;
+        }
+
+        /* Carousel base class */
+        .carousel {
+            margin-bottom: 4rem;
+        }
+
+        /* Since positioning the image, we need to help out the caption */
+        .carousel-caption {
+            bottom: 3rem;
+            z-index: 10;
+        }
+
+        /* Declare heights because of positioning of img element */
+        .carousel-item {
+            height: 28rem;
+            background-color: #777;
+        }
+
+        .carousel-item > img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            height: 32rem;
+        }
+
+        .marketing .col-lg-4 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .marketing h2 {
+            font-weight: 400;
+        }
+
+        .marketing .col-lg-4 p {
+            margin-right: .75rem;
+            margin-left: .75rem;
+        }
+
+        .featurette-divider {
+            margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+        }
+
+        .featurette-heading {
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -.05rem;
+        }
+
+        @media (min-width: 40em) {
+            /* Bump up size of carousel content */
+            .carousel-caption p {
+                margin-bottom: 1.25rem;
+                font-size: 1.25rem;
+                line-height: 1.4;
+            }
+
+            .featurette-heading {
+                font-size: 50px;
+            }
+        }
+
+        @media (min-width: 62em) {
+            .featurette-heading {
+                margin-top: 7rem;
+            }
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="first-slide"
+                     src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     alt="First slide">
+                <div class="container">
+                    <div class="carousel-caption text-left">
+                        <h1>School Made Easy</h1>
+                        <p>Start using the number one homework sharing platform</p>
+                        <div class="btn-group">
+                            <p><a class="btn btn-lg btn-primary mr-4" href="/assignments/search/" role="button">Search</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="/upload/" role="button">Upload</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img class="second-slide"
+                     src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     alt="Second slide">
+                <div class="container">
+                    <div class="carousel-caption text-left">
+                        <h1>Search For Homework</h1>
+                        <p>Find homework assignments by filter through your state and school</p>
+                        <p><a class="btn btn-lg btn-primary" href="/assignments/search/" role="button">Search</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img class="third-slide"
+                     src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     alt="Third slide">
+                <div class="container">
+                    <div class="carousel-caption text-left">
+                        <h1>Upload</h1>
+                        <p>Contribute to our platform by uploading your own homework assignments</p>
+                        <p><a class="btn btn-lg btn-primary" href="/upload/" role="button">Upload</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Cards Row -->
+    <div id="nav-cards-row" class="row">
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div id="homepage-card" class="card shadow pt-4 pb-2">
+                <div align="center">
+                    <i id="upload-icon" class="fas fa-upload card-img-top"></i>
+                </div>
+                <hr class="mt-4 mb-0">
+                <div class="card-body">
+                    <h5 class="card-title">Upload</h5>
+                    <p>Contribute by uploading homework assignments</p>
+                    <a href="/upload/" class="btn btn-outline-primary">Upload</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div id="homepage-card" class="card shadow pt-4 pb-2">
+                <div align="center">
+                    <i id="search-icon" class="fas fa-search card-img-top"></i>
+                </div>
+                <hr class="mt-4 mb-0">
+                <div class="card-body">
+                    <h5 class="card-title">Search</h5>
+                    <p>Search our platform to find homework assignments</p>
+                    <a href="/assignments/search/" class="btn btn-outline-primary">Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center">Latest Posted Assignments</h2>
+    <div id="latest-assignments-row" class="row mt-4">
+        {% for assignment in latest_assignments %}
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ assignment.title }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ assignment.class_name }}</p>
+                        <p class="float-left">{{ assignment.timestamp|date:"M d, Y" }}</p>
+                        <p class="float-left ml-3">{{ assignment.school_name }}</p>
+                        <p class="float-left ml-3">{{ assignment.state }}</p>
+                        <div style="clear: both;"></div>
+                        <a href="/assignments/view/{{ assignment.pk }}/" class="btn btn-primary">View Assignment</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    {% if latest_assignments.count > 0 %}
+        <div align="center">
+            <a href="/assignments/view/all/" id="view-all-link">
+                View All<i id="view-all-icon" class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}

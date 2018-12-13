@@ -1,0 +1,2 @@
+One last step is required for your upload. Visit the following link to confirm your email address, then your homework
+assignment upload will be completed: /assignments/confirm/email/{{ confirmation_pk }}/

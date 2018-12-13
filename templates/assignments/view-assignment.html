@@ -1,0 +1,98 @@
+{% extends 'home/base.html' %}
+{% block title %}<title></title>{% endblock %}
+{% block head %}
+    <style>
+        #assignment-img {
+            width: 100%;
+            border: 1px solid lightgrey;
+        }
+        #modal-assignment-img {
+            width: 100%;
+            height: auto;
+        }
+        .modal-dialog {
+            width: 70% !important;
+            max-width: none!important;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div id="main-container" class="row mt-4">
+        <div id="left-margin" class="col-lg-2 col-md-1 col-sm-0">
+
+        </div>
+
+        <div class="col-lg-8 col-md-10 col-sm-12">
+
+            <div class="row m-0">
+
+                <div id="assignment-image-container" class="col-md-6">
+                    <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
+                            data-target="#assignment-modal">Enlarge Pictures
+                    </button>
+
+                    {% for image in images %}
+                        <img id="assignment-img" class="rounded" src="{{ image.image.url }}">
+
+                        <a download="{{ get_assignment.title }}.jpg" href="{{ image.image.url }}"
+                           class="btn btn-primary mt-2 float-right">
+                            Download Picture
+                        </a>
+                        <div style="clear: both;"></div>
+                    {% endfor %}
+
+                </div>
+
+                <div id="assignment-details-container" class="col-md-6">
+                    <h3 class="font-weight-normal">{{ get_assignment.title }}</h3>
+
+                    <h5 class="font-weight-normal">{{ get_assignment.class_name }}</h5>
+
+                    <p class="text-muted float-left">{{ get_assignment.timestamp|date:"M d, Y" }}</p>
+
+                    <p class="text-muted float-left ml-4">{{ get_assignment.school_name }}</p>
+
+                    <p class="text-muted float-left ml-4">{{ get_assignment.state }}</p>
+                    <div style="clear: both;"></div>
+
+                    <h6>Assignment Notes</h6>
+                    <p>{{ get_assignment.notes }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="right-margin" class="col-lg-2 col-md-1 col-sm-0">
+
+        </div>
+    </div>
+
+    <!-- assignment image modal -->
+    <div class="modal" id="assignment-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ get_assignment.title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    {% for image in images %}
+                    <img id="modal-assignment-img" class="mb-4" src="{{ image.image.url }}" alt="Assignment image">
+                    {% endfor %}
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

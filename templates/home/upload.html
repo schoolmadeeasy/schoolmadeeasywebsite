@@ -1,0 +1,151 @@
+{% extends 'home/base.html' %}
+{% block title %}{% endblock %}
+{% block head %}
+    <style>
+        #main-container {
+            margin-top: 40px;
+            margin-bottom: 75px;
+        }
+        .invalid-feedback {
+            display: none;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+<div id="main-container" class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow px-4 py-2">
+            <h4 class="card-title mt-2 mb-4">Upload an Assignment</h4>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.errors }}
+
+                <div class="form-group">
+                    <label for="id_email">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="id_state">Select Your State</label>
+                        {{ form.state }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="id_school_name">School Name</label>
+                        {{ form.school_name }}
+                        <small class="form-text text-muted">
+                            <span id="school-name-char">75</span> characters left
+                        </small>
+                        <div id="school-name-invalid-feedback" class="invalid-feedback">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_title">Class Name</label>
+                    {{ form.class_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_title">Assignment Title</label>
+                    {{ form.title }}
+                    <small class="form-text text-muted">
+                        <span id="title-char">150</span> characters left
+                    </small>
+                    <div id="title-invalid-feedback" class="invalid-feedback">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_title">Extra Notes</label>
+                    {{ form.notes }}
+                    <small class="form-text text-muted">
+                        <span id="notes-char">2000</span> characters left
+                    </small>
+                    <div id="notes-invalid-feedback" class="invalid-feedback">
+                    </div>
+                </div>
+
+                <p>You can add up to five pictures for an assignment, but only one is required</p>
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    <div class="form-group mt-4">
+                    <div class="custom-file">
+                        {{ form.image }}
+                        <label class="custom-file-label" for="id_image">Choose file</label>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-outline-primary mt-2 mb-3">Upload</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function(){
+
+
+            var schoolName = $('#id_school_name');
+            var schoolNameChar = $('#school-name-char');
+            var schoolInvalidText = $('#school-name-invalid-feedback');
+
+            schoolName.keyup(function(){
+                var currentChars = schoolName.val().length;
+                var calcValue = 75 - currentChars;
+                schoolNameChar.text(calcValue);
+                if (calcValue < 0) {
+                    schoolName.css('border', '1px solid red');
+                    schoolInvalidText.text('School name cannot be more than 75 characters').show();
+                } else {
+                    schoolName.css('border', '1px solid #ced4da');
+                    schoolInvalidText.hide();
+                }
+            });
+
+            var title = $('#id_title');
+            var titleChar = $('#title-char');
+            var titleInvalidText = $('#title-invalid-feedback');
+
+            title.keyup(function(){
+                var currentChars = title.val().length;
+                var calcValue = 150 - currentChars;
+                titleChar.text(calcValue);
+                if (calcValue < 0) {
+                    title.css('border', '1px solid red');
+                    titleInvalidText.text('Title cannot be more than 150 characters').show();
+                } else {
+                    title.css('border', '1px solid #ced4da');
+                    titleInvalidText.hide();
+                }
+            });
+
+            var notes = $('#id_notes');
+            var notesChar = $('#notes-char');
+            var notesInvalidText = $('#notes-invalid-feedback');
+
+            notes.keyup(function(){
+                var currentChars = notes.val().length;
+                var calcValue = 2000 - currentChars;
+                notesChar.text(calcValue);
+                if (calcValue < 0) {
+                    notes.css('border', '1px solid red');
+                    notesInvalidText.text('Notes cannot be more than 2000 characters').show();
+                } else {
+                    notes.css('border', '1px solid #ced4da');
+                    notesInvalidText.hide();
+                }
+            });
+
+        });
+    </script>
+{% endblock %}
